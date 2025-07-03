@@ -1,17 +1,21 @@
-import pandas as pd
-import numpy as np
 from sklearn.linear_model import LinearRegression
+import numpy as np
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('exercise_data.csv')
-
-x = df[['Minutes']]
-y = df['Calories']
+x = np.array([[10], [20], [30], [40], [50]])
+y = np.array([100, 200, 300, 400, 500])
 
 model = LinearRegression()
 model.fit(x, y)
-model.predict([[90]])
+plt.scatter(x.ravel(), y, color='blue',label='Training Data' )
 
-print(f"Predicted calories burned: {model.predict([[90]])[0]:.2f}")
+model.predict([[60]])
+plt.plot(x, model.predict(x), color='red', label='Regression Line')
 
-print (df)
+print(f"Predicted value of calories burned is: {model.predict([[60]])[0]:.2f}")
+plt.xlabel('Minutes of Exercise')
+plt.ylabel('Calories Burned')
+plt.title('Calories Burned vs. Minutes of Exercise')
+plt.legend()
+plt.show()
+
